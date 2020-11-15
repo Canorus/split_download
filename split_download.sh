@@ -1,5 +1,6 @@
+#! /bin/sh
 URL="$1"
-size=`curl -s -I -L "$URL" | gawk -v IGNORECASE=1 '/^Content-Length/ { print $2 }'`
+size=`curl -s -I -L "$URL" | awk -v IGNORECASE=1 '/^Content-Length/ { print $2 }'`
 size=${size//[ $'\001'-$'\037']} # drop any control character
 if [ -z $size ]; then # if file size is not available through header
 	echo 'file size unavailable, check if file is found'
